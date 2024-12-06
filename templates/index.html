@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nutshell - AI Summarizer & Chatbot</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto+Mono&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="container">
+        <h1>Nutshell</h1>
+        <p class="subtitle">Too Long? Didn’t Read? We Got You.</p>
+
+
+        <div class="tabs">
+            <button class="tab-button active" data-mode="text">Text</button>
+            <button class="tab-button" data-mode="file">File</button>
+            <button class="tab-button" data-mode="url">URL</button>
+        </div>
+
+
+        <form id="input-form" enctype="multipart/form-data">
+
+            <div class="tab-content active" id="text-mode">
+                <textarea id="text-input" name="text" placeholder="Paste your text here..." aria-label="Text Input"></textarea>
+            </div>
+            <div class="tab-content" id="file-mode">
+                <div id="drop-zone">
+                    <p>Drag and drop a file here or click to select</p>
+                    <input type="file" id="file-input" name="file" accept=".txt, .pdf, .docx, .rtf, .odt, .epub">
+                </div>
+            </div>
+            <div class="tab-content" id="url-mode">
+                <input type="url" id="url-input" name="url" placeholder="https://example.com/article" aria-label="URL Input">
+            </div>
+
+
+            <div class="bottom-controls">
+
+                <div class="slider-container">
+                    <label for="summary-slider" class="slider-label">Summary Type:</label>
+                    <span id="slider-label">Brief Summary</span>
+                    <input type="range" id="summary-slider" name="summary_slider" min="1" max="3" value="2">
+                </div>
+
+
+                <div class="model-container">
+                    <label for="model-select" class="slider-label">AI Model:</label>
+                    <select id="model-select" name="model">
+                        <option value="gpt-4o-mini" title="Fast and efficient model suitable for most tasks.">GPT-4o Mini</option>
+                        <option value="gpt-4o" title="Extended context length for longer inputs.">GPT-4o</option>
+                        <option value="gpt-4-turbo" title="Advanced reasoning and understanding capabilities.">GPT-4 Turbo</option>
+                    </select>
+                </div>
+
+
+                <button type="submit" id="summarize-btn">Summarize</button>
+            </div>
+        </form>
+
+        <div id="loading-spinner" style="display: none;">
+            <img src="{{ url_for('static', filename='images/spinner.gif') }}" alt="Loading...">
+        </div>
+
+
+        <div id="progress-container" style="display: none;">
+            <progress id="progress-bar" value="0" max="100"></progress>
+            <span id="progress-text">Processing...</span>
+        </div>
+
+
+        <div id="chat-section" class="chat-section">
+
+            <div class="chatbot-label">You are now chatting with the Nutshell Assistant</div>
+
+            <div id="chat-window" class="chat-window" aria-label="Chat Window"></div>
+
+
+            <div class="conversation-type-container">
+                <label for="conversation-slider" class="slider-label">Conversation Type:</label>
+                <span id="conversation-slider-label">Concise Explanation</span>
+                <input type="range" id="conversation-slider" name="conversation_slider" min="1" max="3" value="2">
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chat-input" placeholder="Ask me anything about the summary..." aria-label="Chat Input">
+                <button id="send-btn" aria-label="Send Message">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

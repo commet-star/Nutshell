@@ -1,0 +1,10 @@
+Flask
+openai==0.27.10
+python-dotenv
+PyPDF2
+python-docx
+beautifulsoup4
+requests
+werkzeug
+gunicorn
+newspaper3k
